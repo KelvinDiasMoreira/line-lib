@@ -17,13 +17,16 @@ interface ChildrenProps {
 }
 export function MainComponent({ children }: MainComponentProps) {
   const firstChild = React.Children.toArray(children)[0] as ChildrenProps;
+
   const { type, props } = firstChild;
+  const { style } = props;
+  
   if (type !== "div") {
     return "must be a div";
   }
 
-  const width = props.style.width;
-  const height = props.style.height;
+  const width = style?.width ?? 0;
+  const height = style?.height ?? 0;
 
   console.log(width);
   console.log(height);
