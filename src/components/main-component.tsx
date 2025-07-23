@@ -18,7 +18,7 @@ interface ChildrenProps {
 }
 
 export function MainComponent({ children }: MainComponentProps) {
-  const firstChild = React.Children.toArray(children)[0] as any;
+  const firstChild = React.Children.toArray(children)[0] as ChildrenProps;
 
   const [boundRect, setBoundRect] = useState<DOMRect>();
 
@@ -47,18 +47,33 @@ export function MainComponent({ children }: MainComponentProps) {
       const child = childrenInside[i];
       const { style } = child.props;
       const { width, height, left, top, right, bottom } = style;
-      if (!width || !height || !left) continue;
+      if (!width || !height || !left || !top) continue;
+      if (
+        typeof top === "string" ||
+        typeof height === "string" ||
+        typeof width === "string" ||
+        typeof left === "string"
+      ) {
+        continue;
+      }
       if (!boundRect) continue;
-      console.log(boundRect);
+
+      const middle = boundRect.y + top + height * i + height / 2;
+
+      const maxWithLineLeft = width + left - width * (i === 0 ? 1 : i);
+      const lineLeftSize = maxWithLineLeft;
+      console.log("lineLeftSize", lineLeftSize);
+
       lines.push(
         <div
           style={{
             position: "absolute",
-            width,
+            width: maxWithLineLeft,
             height: 1,
             backgroundColor: "red",
-            left: boundRect?.x,
-            top: boundRect?.y + top,
+            left: boundRect.x,
+
+            top: middle,
           }}
           key={`line-${i}`}
         />
@@ -68,6 +83,7 @@ export function MainComponent({ children }: MainComponentProps) {
 
   const cloned = React.cloneElement(firstChild, {
     children: [...childrenInside, ...lines],
+    //@ts-ignore
     ref: childRef,
   });
 
