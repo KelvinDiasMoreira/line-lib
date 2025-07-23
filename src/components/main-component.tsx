@@ -15,6 +15,7 @@ interface ChildrenProps {
   type: string;
   key: string | null;
   props: IProps;
+  ref?: React.RefObject<HTMLElement | null>; // crap hack
 }
 
 export function MainComponent({ children }: MainComponentProps) {
