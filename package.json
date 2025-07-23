@@ -1,0 +1,20 @@
+{
+  "name": "lib-line",
+  "version": "1.0.0",
+  "main": "./src/index.tsx",
+  "scripts": {
+    "build": "vite build && tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "react": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.5"
+  }
+}
