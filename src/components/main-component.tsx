@@ -11,7 +11,7 @@ interface IProps {
   children: ChildrenProps[];
 }
 
-interface ChildrenProps {
+interface ChildrenProps extends React.CSSProperties {
   type: string;
   key: string | null;
   props: IProps;
