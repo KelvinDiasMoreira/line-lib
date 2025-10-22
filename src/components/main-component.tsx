@@ -30,10 +30,69 @@ export function MainComponent({ children }: MainComponentProps) {
       }
     }
   }, [])
+  const mustRender = childrens.length > 0 && boundChildrens.length > 0 && childrensRefs.current && boundFirstElement
+  const lines: React.JSX.Element[] = []
+  if (mustRender) {
+    for (let i = 0; i < childrensRefs.current.length; i++) {
+      const childRect = childrensRefs.current[i].getBoundingClientRect()
+      /* Left side */
+      lines.push(
+        <div
+          style={{
+            position: "absolute",
+            width: childRect.left - boundFirstElement.left,
+            height: 1,
+            backgroundColor: "blue",
+            left: boundFirstElement?.left,
+            top: childRect.top + (childRect.height / 2),
+          }}
+          key={`line-left-${i}`}
+        />)
+      /* Top side */
+      lines.push(
+        <div
+          style={{
+            position: "absolute",
+            width: 1,
+            height: childRect.top - boundFirstElement.top,
+            backgroundColor: "blue",
+            left: childRect?.left + (childRect.width / 2),
+            top: boundFirstElement.top,
+          }}
+          key={`line-top-${i}`}
+        />)
+      /* Right side */
+      lines.push(
+        <div
+          style={{
+            position: "absolute",
+            width: boundFirstElement.right - childRect.right,
+            height: 1,
+            backgroundColor: "blue",
+            left: childRect?.right,
+            top: childRect.top + (childRect.height / 2),
+          }}
+          key={`line-right-${i}`}
+        />)
+      /* Bottom side */
+      lines.push(
+        <div
+          style={{
+            position: "absolute",
+            width: 1,
+            height: boundFirstElement.bottom - childRect.bottom,
+            backgroundColor: "blue",
+            left: childRect?.left + (childRect.width / 2),
+            top: childRect.bottom,
+          }}
+          key={`line-bottom-${i}`}
+        />)
+    }
+  }
   return React.cloneElement(firstElement, {
     //@ts-ignore
     ref: firstElementRef,
     //@ts-ignore
-    children: clonedChildrens
+    children: [...clonedChildrens, lines]
   })
 }
