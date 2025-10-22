@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ChildrenProps, MainComponentProps } from "./models";
 
+const WIDTH_LINE = 1
+const COLOR_LINE = 'blue'
+
 export function MainComponent({ children }: MainComponentProps) {
   const [boundFirstElement, setBoundFirstElement] = useState<DOMRect>()
   const [boundChildrens, setBoundChildrens] = useState<DOMRect[]>([])
@@ -41,8 +44,8 @@ export function MainComponent({ children }: MainComponentProps) {
           style={{
             position: "absolute",
             width: childRect.left - boundFirstElement.left,
-            height: 1,
-            backgroundColor: "blue",
+            height: WIDTH_LINE,
+            backgroundColor: COLOR_LINE,
             left: boundFirstElement?.left,
             top: childRect.top + (childRect.height / 2),
           }}
@@ -53,9 +56,9 @@ export function MainComponent({ children }: MainComponentProps) {
         <div
           style={{
             position: "absolute",
-            width: 1,
+            width: WIDTH_LINE,
             height: childRect.top - boundFirstElement.top,
-            backgroundColor: "blue",
+            backgroundColor: COLOR_LINE,
             left: childRect?.left + (childRect.width / 2),
             top: boundFirstElement.top,
           }}
@@ -67,8 +70,8 @@ export function MainComponent({ children }: MainComponentProps) {
           style={{
             position: "absolute",
             width: boundFirstElement.right - childRect.right,
-            height: 1,
-            backgroundColor: "blue",
+            height: WIDTH_LINE,
+            backgroundColor: COLOR_LINE,
             left: childRect?.right,
             top: childRect.top + (childRect.height / 2),
           }}
@@ -79,9 +82,9 @@ export function MainComponent({ children }: MainComponentProps) {
         <div
           style={{
             position: "absolute",
-            width: 1,
+            width: WIDTH_LINE,
             height: boundFirstElement.bottom - childRect.bottom,
-            backgroundColor: "blue",
+            backgroundColor: COLOR_LINE,
             left: childRect?.left + (childRect.width / 2),
             top: childRect.bottom,
           }}
