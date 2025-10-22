@@ -1,26 +1,10 @@
-import React, { useEffect, useRef } from "react";
-
-interface MainComponentProps {
-  children: React.ReactNode;
-}
-
-interface StyleProps extends React.CSSProperties { }
-
-interface IProps {
-  style: StyleProps;
-  children: ChildrenProps[];
-}
-
-interface ChildrenProps extends React.CSSProperties {
-  type: string;
-  key: string | null;
-  props: IProps;
-  ref?: React.RefObject<HTMLElement | null>;
-}
+import React, { useEffect, useRef, useState } from "react";
+import { ChildrenProps, MainComponentProps } from "./models";
 
 export function MainComponent({ children }: MainComponentProps) {
+  const [boundFirstElement, setBoundFirstElement] = useState<DOMRect>()
+  const [boundChildrens, setBoundChildrens] = useState<DOMRect[]>([])
   const firstElement = React.Children.toArray(children)[0] as ChildrenProps
-
   if (firstElement.type !== 'div') {
     return <p>first element must be a div</p>
   }
@@ -36,16 +20,16 @@ export function MainComponent({ children }: MainComponentProps) {
       key: idx
     })
   })
-
   useEffect(() => {
     if (firstElementRef.current) {
-      /* TODO */
+      setBoundFirstElement(firstElementRef.current.getBoundingClientRect())
     }
     if (childrensRefs.current) {
-      /* TODO */
+      for (let i = 0; i < childrensRefs.current.length; i++) {
+        setBoundChildrens((prev) => [...prev, childrensRefs.current[i].getBoundingClientRect()])
+      }
     }
   }, [])
-
   return React.cloneElement(firstElement, {
     //@ts-ignore
     ref: firstElementRef,
