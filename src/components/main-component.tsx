@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ChildrenProps, MainComponentProps } from "./models";
-
-const WIDTH_LINE = 1
-const COLOR_LINE = 'blue'
+import buildStyle from "../utils/build-style";
 
 export function MainComponent({ children }: MainComponentProps) {
   const [boundFirstElement, setBoundFirstElement] = useState<DOMRect>()
@@ -42,12 +40,7 @@ export function MainComponent({ children }: MainComponentProps) {
       lines.push(
         <div
           style={{
-            position: "absolute",
-            width: childRect.left - boundFirstElement.left,
-            height: WIDTH_LINE,
-            backgroundColor: COLOR_LINE,
-            left: boundFirstElement?.left,
-            top: childRect.top + (childRect.height / 2),
+            ...buildStyle({ type: 'left', childRect, fatherRect: boundFirstElement })
           }}
           key={`line-left-${i}`}
         />)
@@ -55,12 +48,7 @@ export function MainComponent({ children }: MainComponentProps) {
       lines.push(
         <div
           style={{
-            position: "absolute",
-            width: WIDTH_LINE,
-            height: childRect.top - boundFirstElement.top,
-            backgroundColor: COLOR_LINE,
-            left: childRect?.left + (childRect.width / 2),
-            top: boundFirstElement.top,
+            ...buildStyle({ type: 'top', childRect, fatherRect: boundFirstElement })
           }}
           key={`line-top-${i}`}
         />)
@@ -68,12 +56,7 @@ export function MainComponent({ children }: MainComponentProps) {
       lines.push(
         <div
           style={{
-            position: "absolute",
-            width: boundFirstElement.right - childRect.right,
-            height: WIDTH_LINE,
-            backgroundColor: COLOR_LINE,
-            left: childRect?.right,
-            top: childRect.top + (childRect.height / 2),
+            ...buildStyle({ type: 'right', childRect, fatherRect: boundFirstElement })
           }}
           key={`line-right-${i}`}
         />)
@@ -81,12 +64,7 @@ export function MainComponent({ children }: MainComponentProps) {
       lines.push(
         <div
           style={{
-            position: "absolute",
-            width: WIDTH_LINE,
-            height: boundFirstElement.bottom - childRect.bottom,
-            backgroundColor: COLOR_LINE,
-            left: childRect?.left + (childRect.width / 2),
-            top: childRect.bottom,
+            ...buildStyle({ type: 'bottom', childRect, fatherRect: boundFirstElement })
           }}
           key={`line-bottom-${i}`}
         />)
