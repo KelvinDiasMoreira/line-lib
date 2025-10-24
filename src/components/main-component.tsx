@@ -30,9 +30,10 @@ export function MainComponent({ children }: MainComponentProps) {
         setBoundChildrens((prev) => [...prev, childrensRefs.current[i].getBoundingClientRect()])
       }
     }
-  }, [])
+  }, [childrens.length])
   const mustRender = childrens.length > 0 && boundChildrens.length > 0 && childrensRefs.current && boundFirstElement
   const lines: React.JSX.Element[] = []
+  const tooltips: React.JSX.Element[] = []
   if (mustRender) {
     for (let i = 0; i < childrensRefs.current.length; i++) {
       const childRect = childrensRefs.current[i].getBoundingClientRect()
@@ -44,6 +45,20 @@ export function MainComponent({ children }: MainComponentProps) {
           }}
           key={`line-left-${i}`}
         />)
+      /* Tooltip left side */
+      // tooltips.push(
+      //   <p
+      //     style={{
+      //       position: 'absolute',
+      //       background: 'blue',
+      //       width: 100,
+      //       height: 20,
+      //       left: childRect.left,
+      //       top: childRect.top 
+      //     }}
+      //     key={`line-left-${i}`}
+      //   >{childRect.left - boundFirstElement.left}</p>
+      // )
       /* Top side */
       lines.push(
         <div
@@ -74,6 +89,6 @@ export function MainComponent({ children }: MainComponentProps) {
     //@ts-ignore
     ref: firstElementRef,
     //@ts-ignore
-    children: [...clonedChildrens, lines]
+    children: [...clonedChildrens, lines, tooltips]
   })
 }
