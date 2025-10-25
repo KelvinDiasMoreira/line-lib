@@ -1,14 +1,5 @@
-import { COLOR_LINE, WIDTH_LINE } from "../default-options";
+import { COLOR_LINE, defaultOptions, WIDTH_LINE } from "../default-options";
 import { IbuildStyle } from "./models";
-
-const defaultOptions: any = {
-    position: "absolute",
-    width: 0,
-    height: WIDTH_LINE,
-    backgroundColor: COLOR_LINE,
-    left: 0,
-    top: 0,
-}
 
 export default function buildStyle({ type, childRect, fatherRect }: IbuildStyle) {
     switch (type) {

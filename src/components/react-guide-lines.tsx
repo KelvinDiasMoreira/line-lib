@@ -17,6 +17,9 @@ export function ReactGuideLines({ children }: ReactGuideLinesProps) {
   }
   const clonedChildrens = childrens.map((child, idx) => {
     return React.cloneElement(child, {
+      /**
+       * TODO: fix this shit
+       */
       //@ts-ignore
       ref: (el: HTMLElement) => {
         childrensRefs.current[idx] = el
@@ -133,8 +136,14 @@ export function ReactGuideLines({ children }: ReactGuideLinesProps) {
     }
   }
   return React.cloneElement(firstElement, {
+    /**
+    * TODO: fix this shit
+    */
     //@ts-ignore
     ref: firstElementRef,
+    /**
+    * TODO: fix this shit
+    */
     //@ts-ignore
     children: [...clonedChildrens, lines, tooltips]
   })
