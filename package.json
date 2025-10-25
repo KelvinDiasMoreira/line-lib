@@ -1,12 +1,14 @@
 {
   "name": "react-guidelines",
   "version": "1.0.1",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "vite build && tsc"
   },
   "keywords": [],
-  "author": "",
+  "author": "Kelvin Dias Moreira",
   "license": "ISC",
   "description": "",
   "dependencies": {
@@ -14,7 +16,9 @@
   },
   "devDependencies": {
     "@types/react": "^19.1.8",
+    "@vitejs/plugin-react": "^5.1.0",
     "typescript": "^5.8.3",
-    "vite": "^7.0.5"
+    "vite": "^7.0.5",
+    "vite-plugin-dts": "^4.5.4"
   }
 }
