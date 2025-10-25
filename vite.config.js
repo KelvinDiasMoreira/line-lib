@@ -5,7 +5,7 @@ export default defineConfig({
     build: {
         lib: {
             entry: resolve(__dirname, 'src/index.tsx'),
-            name: 'line-lib',
+            name: 'react-guidelines',
             fileName: 'index'
         },
         rollupOptions: {
