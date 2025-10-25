@@ -1,1 +1,1 @@
-export * from './main-component';
+export * from './react-guide-lines';

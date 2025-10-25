@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ChildrenProps, MainComponentProps } from "./models";
+import { ChildrenProps, ReactGuideLinesProps } from "./models";
 import buildStyle from "../utils/build-style";
 
-export function MainComponent({ children }: MainComponentProps) {
+export function ReactGuideLines({ children }: ReactGuideLinesProps) {
   const [boundFirstElement, setBoundFirstElement] = useState<DOMRect>()
   const [boundChildrens, setBoundChildrens] = useState<DOMRect[]>([])
   const firstElement = React.Children.toArray(children)[0] as ChildrenProps

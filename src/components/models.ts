@@ -1,4 +1,4 @@
-export interface MainComponentProps {
+export interface ReactGuideLinesProps {
   children: React.ReactNode;
 }
 
