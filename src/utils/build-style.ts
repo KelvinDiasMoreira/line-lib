@@ -28,7 +28,7 @@ export default function buildStyle({ type, childRect, fatherRect }: IbuildStyle)
                 width: WIDTH_LINE,
                 height: childRect.top - fatherRect.top,
                 backgroundColor: COLOR_LINE,
-                left: childRect?.left + (childRect.width / 2),
+                left: childRect.left + (childRect.width / 2),
                 top: fatherRect.top,
             }
         }
@@ -39,7 +39,7 @@ export default function buildStyle({ type, childRect, fatherRect }: IbuildStyle)
                 width: fatherRect.right - childRect.right,
                 height: WIDTH_LINE,
                 backgroundColor: COLOR_LINE,
-                left: childRect?.right,
+                left: childRect.right,
                 top: childRect.top + (childRect.height / 2),
             }
         }
@@ -49,7 +49,7 @@ export default function buildStyle({ type, childRect, fatherRect }: IbuildStyle)
                 width: WIDTH_LINE,
                 height: fatherRect.bottom - childRect.bottom,
                 backgroundColor: COLOR_LINE,
-                left: childRect?.left + (childRect.width / 2),
+                left: childRect.left + (childRect.width / 2),
                 top: childRect.bottom,
             }
         }
