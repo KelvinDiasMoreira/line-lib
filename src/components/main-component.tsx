@@ -12,6 +12,9 @@ export function MainComponent({ children }: MainComponentProps) {
   const firstElementRef = useRef<HTMLElement>(null)
   const childrensRefs = useRef<HTMLElement[]>([])
   const { props: { children: childrens } } = firstElement
+  if (!Array.isArray(childrens)) {
+    return 'todo'
+  }
   const clonedChildrens = childrens.map((child, idx) => {
     return React.cloneElement(child, {
       //@ts-ignore
@@ -46,19 +49,20 @@ export function MainComponent({ children }: MainComponentProps) {
           key={`line-left-${i}`}
         />)
       /* Tooltip left side */
-      // tooltips.push(
-      //   <p
-      //     style={{
-      //       position: 'absolute',
-      //       background: 'blue',
-      //       width: 100,
-      //       height: 20,
-      //       left: childRect.left,
-      //       top: childRect.top 
-      //     }}
-      //     key={`line-left-${i}`}
-      //   >{childRect.left - boundFirstElement.left}</p>
-      // )
+      tooltips.push(
+        <p
+          style={{
+            position: 'absolute',
+            color: 'black',
+            fontSize: 12,
+            left: boundFirstElement.left,
+            width: childRect.left - boundFirstElement.left,
+            top: childRect.top - 35 + (childRect.height / 2),
+            whiteSpace: 'nowrap'
+          }}
+          key={`tooltip-left-${i}`}
+        >{childRect.left - boundFirstElement.left}px</p>
+      )
       /* Top side */
       lines.push(
         <div
@@ -67,6 +71,20 @@ export function MainComponent({ children }: MainComponentProps) {
           }}
           key={`line-top-${i}`}
         />)
+      /* Tooltip top side */
+      tooltips.push(
+        <p
+          style={{
+            position: 'absolute',
+            color: 'black',
+            fontSize: 12,
+            left: childRect.left + 10 + (childRect.width / 2),
+            top: childRect.top - 40,
+            whiteSpace: 'nowrap'
+          }}
+          key={`tooltip-top-${i}`}
+        >{childRect.top - boundFirstElement.top}px</p>
+      )
       /* Right side */
       lines.push(
         <div
@@ -75,6 +93,21 @@ export function MainComponent({ children }: MainComponentProps) {
           }}
           key={`line-right-${i}`}
         />)
+      /* Tooltip right side */
+      tooltips.push(
+        <p
+          style={{
+            position: 'absolute',
+            color: 'black',
+            fontSize: 12,
+            width: boundFirstElement.right - childRect.right,
+            left: childRect.right,
+            top: childRect.top - 35 + (childRect.height / 2),
+            whiteSpace: 'nowrap'
+          }}
+          key={`tooltip-right-${i}`}
+        >{boundFirstElement.right - childRect.right}px</p>
+      )
       /* Bottom side */
       lines.push(
         <div
@@ -83,6 +116,20 @@ export function MainComponent({ children }: MainComponentProps) {
           }}
           key={`line-bottom-${i}`}
         />)
+      /* Tooltip bottom side */
+      tooltips.push(
+        <p
+          style={{
+            position: 'absolute',
+            color: 'black',
+            fontSize: 12,
+            left: childRect.left + 10 + (childRect.width / 2),
+            top: childRect.bottom,
+            whiteSpace: 'nowrap'
+          }}
+          key={`tooltip-bottom-${i}`}
+        >{boundFirstElement.bottom - childRect.bottom}px</p>
+      )
     }
   }
   return React.cloneElement(firstElement, {
