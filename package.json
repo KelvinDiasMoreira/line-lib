@@ -1,5 +1,5 @@
 {
-  "name": "lib-line",
+  "name": "react-guidelines",
   "version": "1.0.0",
   "main": "./src/index.tsx",
   "scripts": {
